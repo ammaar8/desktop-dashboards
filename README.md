@@ -1,5 +1,5 @@
 # Desktop Dashboards
-### Bringing Dashboards to your desktop to let you keep track of things you want to keep track of - easily.
+### Bringing Dashboards to your desktop to let you keep track of things you want to keep track of - with wallpapers.
 
 ![](images/sample_dashboard.png)
 
