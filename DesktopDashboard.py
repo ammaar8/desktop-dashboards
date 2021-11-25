@@ -2,19 +2,20 @@ from datetime import datetime
 from ATimeLogger import ATimeLoggerClient
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import configparser
 
-
+config = configparser.ConfigParser()
+config.read('settings.ini')
 
 MARKER_SIZE = 10
 if __name__ == '__main__':
-    client = ATimeLoggerClient("email", "pass")
-
+    client = ATimeLoggerClient(config['LOGIN']['username'],config['LOGIN']['password'])
 
     # Graph 1
     df = client.get_group_hours(
         datetime(day=1, month=1, year=2021),
         datetime(day=31, month=12, year=2021),
-        'Graph 1'
+        config['GRAPHS']['fig1_1']
     )
 
     fig = make_subplots(rows=2, cols=1)
@@ -44,8 +45,18 @@ if __name__ == '__main__':
     df = client.get_group_hours(
         datetime(day=1, month=1, year=2021),
         datetime(day=31, month=12, year=2021),
-        'Graph 2',
+        config['GRAPHS']['fig1_2']
     )
+    fig.add_trace(
+        go.Scatter(
+            x=df.index,
+            y=df['hours'],
+            line_color='rgba(239, 84, 57, 0.2)',
+        ),
+        row=1,
+        col=1,
+    )
+
     fig.add_trace(
         go.Scatter(
             x=df.index,
@@ -59,6 +70,8 @@ if __name__ == '__main__':
     fig.update_layout(
         paper_bgcolor='rgb(0,0,0)',
         plot_bgcolor='rgb(0,0,0)',
+        yaxis_range=[0, 16],
+        yaxis2_range=[0, 16],
         xaxis_showgrid=False,
         yaxis_zeroline=False,
         yaxis_showgrid=False,
@@ -93,7 +106,7 @@ if __name__ == '__main__':
     df = client.get_group_hours(
         datetime(day=1, month=1, year=2021),
         datetime(day=31, month=12, year=2021),
-        'Graph 3'
+        config['GRAPHS']['fig2_1']
     )
 
     fig2.add_trace(
@@ -121,7 +134,7 @@ if __name__ == '__main__':
     df = client.get_activity_hours(
         datetime(day=1, month=1, year=2021),
         datetime(day=31, month=12, year=2021),
-        'Graph 4',
+        config['GRAPHS']['fig2_2']
     )
 
     fig2.add_trace(
