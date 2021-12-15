@@ -3,12 +3,15 @@ from ATimeLogger import ATimeLoggerClient
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import configparser
+import os
 
-config = configparser.ConfigParser()
-config.read('settings.ini')
+
 
 MARKER_SIZE = 10
 if __name__ == '__main__':
+    project_dir, _ = os.path.split(os.path.abspath(__file__))
+    config = configparser.ConfigParser()
+    config.read(os.path.join(project_dir, 'settings.ini'))
     client = ATimeLoggerClient(config['LOGIN']['username'],config['LOGIN']['password'])
 
     # Graph 1
@@ -17,7 +20,6 @@ if __name__ == '__main__':
         datetime(day=31, month=12, year=2021),
         config['GRAPHS']['fig1_1']
     )
-
     fig = make_subplots(rows=2, cols=1)
     fig.add_trace(
         go.Scatter( 
@@ -46,15 +48,6 @@ if __name__ == '__main__':
         datetime(day=1, month=1, year=2021),
         datetime(day=31, month=12, year=2021),
         config['GRAPHS']['fig1_2']
-    )
-    fig.add_trace(
-        go.Scatter(
-            x=df.index,
-            y=df['hours'],
-            line_color='rgba(239, 84, 57, 0.2)',
-        ),
-        row=1,
-        col=1,
     )
 
     fig.add_trace(
@@ -180,5 +173,5 @@ if __name__ == '__main__':
 
 
     print("Writing Images")
-    fig.write_image('wallpaper_images/desktopdashboard_screen1.png')
-    fig2.write_image('wallpaper_images/desktopdashboard_screen2.png')
+    fig.write_image(os.path.join(project_dir, 'wallpaper_images', 'desktopdashboard_screen1.png'))
+    fig2.write_image(os.path.join(project_dir, 'wallpaper_images', 'desktopdashboard_screen2.png'))
