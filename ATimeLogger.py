@@ -194,8 +194,8 @@ class ATimeLoggerClient:
         df['date'] = pd.to_datetime(df['date'])
         df = df[['date', 'hours']]
         period = pd.date_range(
-            datetime(day=1, month=1, year=2021),
-            datetime(day=31, month=12, year=2021),
+            start,
+            end,
             freq='D'
         )
         df = df.groupby('date').sum().reset_index()
@@ -214,8 +214,8 @@ class ATimeLoggerClient:
         df['date'] = pd.to_datetime(df['date'])
         df = df[['date', 'hours']]
         period = pd.date_range(
-            datetime(day=1, month=1, year=2021),
-            datetime(day=31, month=12, year=2021),
+            start,
+            end,
             freq='D'
         )
         df = df.groupby('date').sum().reset_index()
