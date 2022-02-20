@@ -16,8 +16,8 @@ if __name__ == '__main__':
 
     # Graph 1
     df = client.get_group_hours(
-        datetime(day=1, month=1, year=2021),
-        datetime(day=31, month=12, year=2021),
+        datetime(day=1, month=1, year=2022),
+        datetime(day=31, month=12, year=2022),
         config['GRAPHS']['fig1_1']
     )
     fig = make_subplots(rows=2, cols=1)
@@ -45,8 +45,8 @@ if __name__ == '__main__':
 
     # Graph 2
     df = client.get_group_hours(
-        datetime(day=1, month=1, year=2021),
-        datetime(day=31, month=12, year=2021),
+        datetime(day=1, month=1, year=2022),
+        datetime(day=31, month=12, year=2022),
         config['GRAPHS']['fig1_2']
     )
 
@@ -97,8 +97,8 @@ if __name__ == '__main__':
     fig2 = make_subplots(rows=2, cols=1)
     # Graph 3
     df = client.get_group_hours(
-        datetime(day=1, month=1, year=2021),
-        datetime(day=31, month=12, year=2021),
+        datetime(day=1, month=1, year=2022),
+        datetime(day=31, month=12, year=2022),
         config['GRAPHS']['fig2_1']
     )
 
@@ -125,8 +125,8 @@ if __name__ == '__main__':
     )
     # Graph 4
     df = client.get_activity_hours(
-        datetime(day=1, month=1, year=2021),
-        datetime(day=31, month=12, year=2021),
+        datetime(day=1, month=1, year=2022),
+        datetime(day=31, month=12, year=2022),
         config['GRAPHS']['fig2_2']
     )
 
